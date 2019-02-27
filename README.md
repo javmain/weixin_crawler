@@ -6,6 +6,10 @@ weixin_crawler是一款使用Scrapy、Flask、Echarts、Elasticsearch等实现�
 
 https://www.youtube.com/watch?v=CbfLRCV7oeU&t=8s
 
+## 免部署马上体验公众号数据采集
+
+通过免安装可执行程序WCplus.exe  https://shimo.im/docs/E1IjqOy2cYkPRlZd 可马上体验weixin_crawler的数据采集功、导出Excel和PDF功能
+
 ## 主要特点
 
 1. 使用Python3编写
@@ -42,7 +46,8 @@ https://www.youtube.com/watch?v=CbfLRCV7oeU&t=8s
 
 ## 运行方法
 
-友情提醒：weixin_crawler尚未在Mac和Linux下尝试运行。如果想尽快看到结果，请优先使用win系统尝试
+weixin_crawler已经在Win/Mac/Linux系统下运行成功, 建议优先使用win系统尝试
+weixin_crawler could work on win/mac/linux, although it is suggested to try on win os firstly
 
 > #### Insatall  mongodb / redis / elasticsearch and run them in the background
 > 
