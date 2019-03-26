@@ -24,7 +24,11 @@ def restart():
 @app.route('/gzh_article_list/<nickname>', methods=['GET'])
 def gzh_article_list(nickname):
     from Application.report.AllArticles import get_all_articles_data
-    data = get_all_articles_data(nickname)
+    page = request.values.get("page")
+    if page is None:
+        page = 1
+    data = get_all_articles_data(nickname, page)
+    data['page'] = page
     return render_template('report/all_articles.html', data=data)
 
 @app.route('/delete_article', methods=['POST'])

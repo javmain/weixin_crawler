@@ -62,6 +62,7 @@ a:active {
             </tbody>
         </table>
     </div>
+    <div class="pagination"></div>
 </body>
 {% endblock %}
 
@@ -74,7 +75,17 @@ a:active {
     });
 
     var url = window.location.href;
-    console.log(url);
+
+    $('.pagination').pagination({
+        total: [[ data['count']]],
+        /*每页条数*/
+        row: 20,
+        /*当前页索引*/
+        current: [[ data['page']]],
+        onJump: function(index){
+            window.location.href = url.replace(/\d+$/, index)
+        }
+    });
 
     $(document).on('click', '.delete_article', function(evt){
         var result = $(this).attr("name");

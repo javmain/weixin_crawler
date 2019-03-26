@@ -1,11 +1,14 @@
-from db import get_collection_article
+from db import get_collection_article_by_page
 from db import delete
+from db import count
 from bson.objectid import ObjectId
 
 
-def get_all_articles_data(nickname):
+def get_all_articles_data(nickname, page=1, page_size=20):
     """
     :param nickname:公众号昵称
+    :param page: 分页
+    :param page_size 每页显示
     :return:一个公众号的全部文章列表
     {'title':'公众号名称','articles':[{},{},{}]}
     """
@@ -22,8 +25,9 @@ def get_all_articles_data(nickname):
                 'id']
     data = {}
     data['title'] = nickname
+    data['count'] = count(nickname)
     data['articles'] = []
-    articles = get_collection_article(nickname)
+    articles = get_collection_article_by_page(nickname, page, page_size)
     id_counter = 0
     for article in articles:
         if 'title' not in article:

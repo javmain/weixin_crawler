@@ -150,6 +150,19 @@ def get_collection_article(nickname,**kwargs):
     for article in articles:
         yield article
 
+def get_collection_article_by_page(nickname, page=1, page_size= 20 ,**kwargs):
+    """
+    :param nickname:
+    :param kwargs: 例如找出不存在article字段的所有数据 {"article":{"$exists": False}}
+    :return: 以生成器的形式返回一个公众号的全部或者部分数据
+    """
+    skip = page_size * (int(page) - 1)
+    col = db_instance[nickname]
+    articles = col.find(kwargs).sort('p_date', -1).limit(page_size).skip(skip)
+    for article in articles:
+        yield article
+
+
 class WeixinDB():
     """
     针对微信全部数据提供方法 暴露给全部程序可见
