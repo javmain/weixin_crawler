@@ -83,7 +83,14 @@ a:active {
         /*当前页索引*/
         current: [[ data['page']]],
         onJump: function(index){
-            window.location.href = url.replace(/\d+$/, index)
+            var pageUrl = '';
+            if(url.includes("page")){
+                var pageUrl = url.replace(/\d+$/, index)
+            } else {
+                pageUrl = url + '?page=' + index
+            }
+            console.log(pageUrl)
+            window.location.href = pageUrl
         }
     });
 
