@@ -21,6 +21,9 @@ a:hover {
 a:active {
     text-decoration: underline;
 }
+.delete_article {
+    cursor: pointer
+}
 {% endblock %}
 
 {% block body %}
@@ -38,6 +41,7 @@ a:active {
                 <th><i class="fa fa-user w3-text-green w3-large"></i> 作者</th>
                 <th><i class="fa fa-building w3-text-green w3-large"></i> 位置</th>
                 <th><i class="fa fa-file-text w3-text-green w3-large"></i> 标题</th>
+                <th><i class="fa fa-file-text w3-text-green w3-large"></i> 操作</th>
             </tr>
             </thead>
             <tbody id="">
@@ -52,6 +56,7 @@ a:active {
                 <td>[[ article['author'] ]]</td>
                 <td>[[ article['mov'] ]]</td>
                 <td><a href="[[ article['content_url'] ]]" target="_blank">[[ article['title'] ]]</a></td>
+                <td><button class="delete_article" name="[[ article['id']]]">删除</button></td>
             </tr>
             {% endfor %}
             </tbody>
@@ -66,6 +71,17 @@ a:active {
     $(function() {
         $("table")
             .tablesorter({debug: false})
+    });
+
+    var url = window.location.href;
+    console.log(url);
+
+    $(document).on('click', '.delete_article', function(evt){
+        var result = $(this).attr("name");
+        console.log(result)
+        $.post('/delete_article', {'nickname':"[[ data['title']]]", article_id:result}).done(function () {
+            window.location.href = url;
+        })
     });
 </script>
 {% endblock %}

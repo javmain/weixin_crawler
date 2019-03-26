@@ -1,4 +1,6 @@
 from db import get_collection_article
+from db import delete
+from bson.objectid import ObjectId
 
 
 def get_all_articles_data(nickname):
@@ -16,7 +18,8 @@ def get_all_articles_data(nickname):
                 'author',
                 'mov',
                 'title',
-                'content_url']
+                'content_url',
+                'id']
     data = {}
     data['title'] = nickname
     data['articles'] = []
@@ -36,5 +39,14 @@ def get_all_articles_data(nickname):
         # 发文时间格式转化
         use_data['p_date'] = use_data['p_date'].strftime("%Y/%m/%d")
         use_data['article_id'] = id_counter
+        use_data['id'] = article['_id']
         data['articles'].append(use_data)
     return data
+
+
+def delete_article(nickname, article_id):
+    """
+    :param nickname:公众号昵称
+    :param article_id: 文章 Id
+    """
+    delete(nickname, _id=ObjectId(article_id))

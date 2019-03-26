@@ -1,5 +1,5 @@
 from ui.ui_instance import app
-from flask import render_template
+from flask import render_template, request
 
 
 @app.route('/', methods=['GET'])
@@ -26,6 +26,12 @@ def gzh_article_list(nickname):
     from Application.report.AllArticles import get_all_articles_data
     data = get_all_articles_data(nickname)
     return render_template('report/all_articles.html', data=data)
+
+@app.route('/delete_article', methods=['POST'])
+def delete_article():
+    from Application.report.AllArticles import delete_article
+    delete_article(request.form['nickname'], request.form['article_id'])
+    return "删除成功"
 
 
 @app.route('/gzh_report/<nickname>', methods=['GET'])

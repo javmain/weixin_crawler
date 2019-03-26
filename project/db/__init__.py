@@ -146,7 +146,7 @@ def get_collection_article(nickname,**kwargs):
     :return: 以生成器的形式返回一个公众号的全部或者部分数据
     """
     col = db_instance[nickname]
-    articles = col.find(kwargs)
+    articles = col.find(kwargs).sort('p_date', -1)
     for article in articles:
         yield article
 
